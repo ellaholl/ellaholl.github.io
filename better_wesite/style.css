@@ -7,7 +7,7 @@
   }
   
   .navbar {
-    background: #131313;
+    background: #fdfdfd;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@
   }
   
   #navbar__logo {
-    background-color: #ff8177;
+    background-color: #8077ff;
     background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
     background-size: 100%;
     -webkit-background-clip: text;
@@ -55,7 +55,7 @@
   }
   
   .navbar__links {
-    color: #fff;
+    color: rgb(92, 74, 255);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +92,7 @@
   }
   
   .navbar__links:hover {
-    color: #9518fc;
+    color: #5c18fc;
     transition: all 0.3s ease;
   }
   
@@ -120,7 +120,7 @@
     }
   
     .navbar__menu.active {
-      background: #131313;
+      background: #ffffff;
       top: 100%;
       opacity: 1;
       transition: all 0.5s ease;
@@ -192,7 +192,7 @@
   
   /* Hero Section */
   .hero {
-    background: #000000;
+    background: #5959ff;
     background: linear-gradient(to right, #161616, #000000);
     padding: 200px 0;
   }
