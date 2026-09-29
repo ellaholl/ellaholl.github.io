@@ -1,392 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ella Holl</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ella Holl</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#0a0a0a;--mute:#8a8a8f;--pill:#0a0a0a;--pillfg:#fff;--dock:rgba(200,200,208,.55);--dockon:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b0d;--fg:#f4f4f5;--mute:#8b8b92;--pill:#f4f4f5;--pillfg:#0b0b0d;--dock:rgba(60,60,68,.6);--dockon:#2a2a30}}
+:root[data-theme="dark"]{--bg:#0b0b0d;--fg:#f4f4f5;--mute:#8b8b92;--pill:#f4f4f5;--pillfg:#0b0b0d;--dock:rgba(60,60,68,.6);--dockon:#2a2a30}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.4;-webkit-font-smoothing:antialiased}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;flex-wrap:wrap}
+.logo{padding:0;font-size:22px;font-weight:500;letter-spacing:-.02em}
+nav.filters{order:2;display:flex;gap:4px;flex-wrap:wrap}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.filters button{padding:10px 20px;border-radius:999px;color:var(--mute);font-size:18px;transition:background .2s,color .2s}
+.filters button:hover{color:var(--fg)}
+.filters button[aria-pressed="true"]{background:var(--pill);color:var(--pillfg)}
+#theme,#mode,#about{width:40px;height:40px;display:grid;place-items:center;border-radius:50%}
+.tools{order:3;display:flex;gap:8px;margin-left:auto}
+.logo{order:1}
+@media (max-width:900px){.tools{order:2}nav.filters{order:3;flex-basis:100%}}
+.to-work{display:none}
+body[data-mode="personal"] .to-work{display:block}body[data-mode="personal"] .to-personal{display:none}
+#about[aria-pressed="true"],#mode:hover,#theme:hover,#about:hover{background:color-mix(in srgb,var(--mute) 18%,transparent)}
+main{padding:32px 24px 80px}
+.grid{columns:3 320px;column-gap:24px}
+.card{break-inside:avoid;margin:0 0 40px;display:block;width:100%;text-align:left}
+.art{border-radius:32px;overflow:hidden;position:relative;width:100%}
+.card h3{margin:16px 0 4px;font-size:20px;font-weight:500;letter-spacing:-.01em}
+.card p{margin:0;color:var(--mute);font-size:16px}
+.card.hide{display:none}
+.code{font:11px/1.6 ui-monospace,Menlo,monospace;color:#7ee0c3;padding:22px;white-space:pre;overflow:hidden}
+.code i{color:#ff9a6c;font-style:normal}.code b{color:#8aa4ff;font-weight:400}
+.big{position:absolute;left:24px;bottom:20px;font-size:44px;font-weight:600;letter-spacing:-.04em;color:#fff;line-height:1}
+section.info{padding:60px 24px;max-width:720px}
+section.info h2{font-size:32px;font-weight:500;letter-spacing:-.02em;margin:0 0 16px}
+section.info p{color:var(--mute);font-size:19px;line-height:1.55;margin:0 0 12px}
+section.info a{color:var(--fg)}
+.sun{display:none}
+:root[data-theme="dark"] .sun{display:block}:root[data-theme="dark"] .moon{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sun{display:block}:root:not([data-theme="light"]) .moon{display:none}}
+.pop{position:fixed;right:24px;top:calc(72px + env(safe-area-inset-top,0px));width:min(360px,calc(100% - 32px));padding:24px;border-radius:24px;background:var(--bg);border:1px solid color-mix(in srgb,var(--mute) 25%,transparent);box-shadow:0 18px 50px rgba(0,0,0,.18);z-index:6}
+.pop[hidden]{display:none}
+.pop h4{margin:0 0 10px;font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.pop .bio{margin:0 0 24px;font-size:17px;line-height:1.5}
+.pop a.mail{display:block;color:var(--fg);text-decoration:none;font-size:18px;margin-bottom:24px}
+.pop .socials{margin-top:0}
+.socials{display:flex;gap:12px;margin-top:20px}
+.socials a{width:44px;height:44px;border-radius:50%;border:1px solid color-mix(in srgb,var(--mute) 35%,transparent);display:grid;place-items:center;color:var(--fg)}
+.socials a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+
+@media (max-width:640px){.pop{right:16px}header{padding:16px}main{padding:16px 16px 60px}.filters button{font-size:16px;padding:8px 14px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
-<body>
+<body data-view="work">
+<header>
+  <div class="logo">Ella Holl</div>
+  <nav class="filters" id="filters" aria-label="Filter work">
+    <button aria-pressed="true" data-f="all">everything</button>
+    <button aria-pressed="false" data-f="coding">coding</button>
+    <button aria-pressed="false" data-f="research">research</button>
+    <button aria-pressed="false" data-f="design">design</button>
+    <button aria-pressed="false" data-f="personal">personal</button>
+  </nav>
+  <div class="tools"><button id="mode" aria-label="Switch to personal work" title="Switch to personal work"><svg class="to-personal" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.6-1-2.7 0-1 .8-1.5 1.8-1.5H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg><svg class="to-work" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2.5 19h19M9 19l.5-4h5l.5 4"/></svg></button><button id="about" aria-label="About and contact" title="About and contact" aria-pressed="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/></svg></button><button id="theme" aria-label="Toggle light or dark mode"><svg class="moon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div>
+</header>
 
-<!-- NAV -->
-<nav>
-  <a href="#home" class="nav-logo">Ella Holl</a>
-  <ul class="nav-links">
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#creative">Creative</a></li>
-  </ul>
-</nav>
+<main id="work"><div class="grid" id="grid"></div></main>
 
-<!-- HERO -->
-<section id="home">
-  <div class="hero-waves">
-    <svg viewBox="0 0 1440 560" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- back wave: deep ocean fill, sweeps in from bottom-right -->
-      <path d="M0,560 L0,360 C180,280 340,420 520,340 C700,260 820,380 1020,300 C1200,230 1340,310 1440,260 L1440,560 Z"
-            fill="#1b3a52" opacity="0.06"/>
-      <!-- mid wave: seafoam, gentler curve -->
-      <path d="M0,560 L0,420 C120,360 280,480 460,410 C640,340 780,450 980,390 C1140,340 1320,410 1440,370 L1440,560 Z"
-            fill="#6baaa0" opacity="0.12"/>
-      <!-- front wave: sand, rides closest to the bottom -->
-      <path d="M0,560 L0,490 C160,440 320,510 500,470 C680,430 840,500 1040,460 C1200,428 1350,468 1440,450 L1440,560 Z"
-            fill="#e4d8c4" opacity="0.22"/>
-      <!-- top accent: sweeping arc across upper portion -->
-      <path d="M-100,0 C200,80 500,-30 800,60 C1100,150 1300,20 1600,80 L1600,-10 L-100,-10 Z"
-            fill="#6baaa0" opacity="0.07"/>
-    </svg>
-  </div>
-  <div class="hero-inner">
-    <h1 class="hero-h1">Ella Holl</h1>
-    <p class="hero-desc">
-      Data research, half-finished tools, a bit about me, and whatever I've been painting lately.
-    </p>
-    <div class="hero-actions">
-      <a href="#blog" class="btn-pink">Read the blog</a>
-      <a href="#about" class="btn-line">About me →</a>
-    </div>
-    <div class="hero-quad">
-      <a href="#blog" class="quad-card">
-        <span class="quad-icon">📝</span>
-        <span class="quad-title">Blog</span>
-        <span class="quad-desc">Research posts & data findings</span>
-      </a>
-      <a href="#projects" class="quad-card">
-        <span class="quad-icon">🛠️</span>
-        <span class="quad-title">Projects</span>
-        <span class="quad-desc">Tools I'm building</span>
-      </a>
-      <a href="#about" class="quad-card">
-        <span class="quad-icon">👋</span>
-        <span class="quad-title">About</span>
-        <span class="quad-desc">A bit about me & what I do</span>
-      </a>
-      <a href="#creative" class="quad-card">
-        <span class="quad-icon">🎨</span>
-        <span class="quad-title">Creative</span>
-        <span class="quad-desc">Art, design & photography</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- wave: hero → blog -->
-<div class="wave-divider" style="background:var(--warm-white);">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,24 C360,48 720,0 1080,32 C1260,44 1380,12 1440,24 L1440,48 L0,48 Z" fill="var(--sand-pale)"/>
-  </svg>
+<div class="pop" id="pop" role="dialog" aria-label="About and contact" hidden>
+  <h4>About me</h4>
+  <p class="bio">I'm Ella, a developer, researcher and designer. I build interfaces, run small studies, and make photography and art on the side.</p>
+  <h4>Say hi</h4>
+  <a class="mail" href="mailto:hello@example.com">hello@example.com</a>
+  <h4>Follow me</h4>
+  <div class="socials"><a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a><a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 10v8M6 6.5v.01M11 18v-8M11 13c0-2 1.5-3 3-3s3 1 3 3v5"/></svg></a><a href="#" aria-label="Dribbble"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5 7c5 1 9 0 13-3M3.5 12.5c5-1 10 0 14 6M8.5 3.5c3 3 5 8 6 17"/></svg></a></div>
 </div>
+<script>
+var items=[
+ {t:"Paper & Pine Identity",c:"design",tags:"#branding #logo #packaging",h:360,bg:"linear-gradient(160deg,#2f4a3a,#1d3026)",big:"P&P"},
+ {t:"Orbit Wayfinding",c:"design",tags:"#signage #systems #typography",h:280,bg:"linear-gradient(120deg,#ffcf3f,#ff9d1f)",big:"→ B4",dark:true},
+ {t:"Harbor at Dusk",c:"photography",tags:"#film #coast #long-exposure",h:400,bg:"linear-gradient(180deg,#f6b58a,#c56b7e 45%,#2c3557 75%,#131a33)"},
+ {t:"Fog Season",c:"photography",tags:"#landscape #morning #35mm",h:300,bg:"linear-gradient(180deg,#dfe4e6,#aab6ba 60%,#6f7f7c)"},
+ {t:"Signal Board",c:"coding",tags:"#react #dashboard #typescript",h:300,bg:"linear-gradient(160deg,#0f1a2b,#16283f)",code:true},
+ {t:"Sleep & Screens",c:"research",tags:"#survey #ux-research #sleep",h:380,bg:"radial-gradient(circle at 30% 30%,#ffd6a5,transparent 55%),radial-gradient(circle at 75% 80%,#9bb7ff,transparent 55%),#3a3f7a",big:"n = 412"},
+ {t:"Chromatic Dreams",c:"art",tags:"#illustration #digital-art #abstract",h:460,bg:"radial-gradient(circle at 50% 45%,#f4b06a 0 22%,transparent 23%),linear-gradient(180deg,#3a1a6b,#d63a68 70%,#ff6a5a)"},
+ {t:"Sourdough Log",c:"personal",tags:"#baking #notes #weekends",h:280,bg:"radial-gradient(ellipse at 50% 60%,#e8c48a 0 35%,transparent 36%),linear-gradient(#f3e6d0,#d9b98a)"},
+ {t:"Color Theory",c:"art",tags:"#abstract #digital #experimental",h:250,bg:"radial-gradient(circle at 20% 60%,#ff9a3c,transparent 45%),radial-gradient(circle at 70% 20%,#2a9dff,transparent 50%),radial-gradient(circle at 60% 90%,#ff4fd8,transparent 45%),#ffd27a"},
+ {t:"Tiny CLI Toolkit",c:"coding",tags:"#node #cli #open-source",h:340,bg:"linear-gradient(160deg,#101418,#1c2530)",code:true,alt:true},
+ {t:"How People Skim Docs",c:"research",tags:"#eye-tracking #reading #study",h:300,bg:"linear-gradient(120deg,#e8f0ff,#c9d9ff)",big:"6 weeks",dark:true},
+ {t:"Night Walks",c:"photography",tags:"#photography #film #city",h:420,bg:"radial-gradient(circle at 60% 40%,#ffb347 0 6%,transparent 7%),linear-gradient(180deg,#0d0d14,#1f1a2b 60%,#3b2a2a)"},
+ {t:"Urban Fragments",c:"art",tags:"#illustration #urban #collage",h:380,bg:"radial-gradient(circle at 50% 50%,#ff9d3c 0 8%,transparent 9%),linear-gradient(180deg,#0e0a08,#2a1408 75%,#0e0a08)"},
+ {t:"Accessible Forms Kit",c:"coding",tags:"#a11y #components #css",h:260,bg:"linear-gradient(135deg,#5b8cff,#7be0c3)",big:"AA+"},
+ {t:"Reading List 2026",c:"personal",tags:"#books #reading #year",h:300,bg:"repeating-linear-gradient(90deg,#c7513a 0 22px,#e9a23b 22px 44px,#3b6e8f 44px 66px,#2f4a3a 66px 88px)"},
+ {t:"Interview Synthesis",c:"research",tags:"#interviews #affinity-map #insights",h:340,bg:"radial-gradient(circle at 20% 25%,#ffe27a 0 9%,transparent 10%),radial-gradient(circle at 60% 40%,#ff9ab0 0 9%,transparent 10%),radial-gradient(circle at 35% 70%,#8fe0b0 0 9%,transparent 10%),radial-gradient(circle at 80% 75%,#9bc4ff 0 9%,transparent 10%),#f4efe6"}
+];
+var codeA='<b>const</b> board = <b>await</b> load();\n<b>for</b> (<b>const</b> s <b>of</b> board.signals) {\n  <b>if</b> (s.delta &gt; <i>0.2</i>) {\n    notify(s.name, s.delta);\n  }\n}\n<b>export</b> <b>default</b> board;';
+var codeB='$ jt init my-tool\n<i>✔</i> created package.json\n<i>✔</i> added tests\n$ jt run --watch\n<i>listening…</i>';
+var groups={work:['coding','research','design'],personal:['photography','art','personal']};
+var grid=document.getElementById('grid'),mode='work',f='all';
+items.forEach(function(it){
+  var a=document.createElement('a');a.className='card';a.dataset.c=it.c;a.dataset.g=groups.personal.indexOf(it.c)>-1?'personal':'work';a.href='#';a.setAttribute('role','listitem');
+  var inner=it.code?'<div class="code">'+(it.alt?codeB:codeA)+'</div>':(it.big?'<div class="big" style="'+(it.dark?'color:#1c2a52':'')+'">'+it.big+'</div>':'');
+  a.innerHTML='<div class="art" style="height:'+it.h+'px;background:'+it.bg+'">'+inner+'</div><h3>'+it.t+'</h3><p>'+it.tags+'</p>';
+  a.addEventListener('click',function(e){e.preventDefault()});
+  grid.appendChild(a);
+});
+var fbox=document.getElementById('filters');
+function apply(){
+  document.querySelectorAll('.card').forEach(function(c){c.classList.toggle('hide',c.dataset.g!==mode||(f!=='all'&&c.dataset.c!==f))});
+}
+function buildFilters(){
+  fbox.innerHTML='';
+  ['all'].concat(groups[mode]).forEach(function(k){
+    var b=document.createElement('button');b.dataset.f=k;b.textContent=k==='all'?'everything':k;b.setAttribute('aria-pressed',k===f);
+    b.addEventListener('click',function(){f=k;fbox.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});apply()});
+    fbox.appendChild(b);
+  });
+}
+var mb=document.getElementById('mode');
+function setMode(m){
+  mode=m;f='all';document.body.dataset.mode=m;
+  var l=m==='work'?'Switch to personal work':'Switch to professional work';
+  mb.setAttribute('aria-label',l);mb.title=l;
+  buildFilters();apply();
+  try{localStorage.setItem('mode',m)}catch(e){}
+}
+mb.addEventListener('click',function(){setMode(mode==='work'?'personal':'work')});
+var root=document.documentElement;
+document.getElementById('theme').addEventListener('click',function(){
+  var dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
+  try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}
+});
+try{var s=localStorage.getItem('theme');if(s)root.dataset.theme=s}catch(e){}
+var ab=document.getElementById('about'),pop=document.getElementById('pop');
+function setPop(o){pop.hidden=!o;ab.setAttribute('aria-pressed',o);ab.setAttribute('aria-expanded',o)}
+ab.addEventListener('click',function(){setPop(pop.hidden)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')setPop(false)});
+document.addEventListener('click',function(e){if(!pop.hidden&&!pop.contains(e.target)&&!ab.contains(e.target))setPop(false)});
+var sm='work';try{sm=localStorage.getItem('mode')||'work'}catch(e){}
+setMode(sm==='personal'?'personal':'work');
 
-<!-- BLOG -->
-<section id="blog">
-  <!-- coastal doodles: thin horizon lines, coordinates, minimal circles -->
-  <div class="doodle" style="top:6%; right:4%; width:80px; opacity:0.2;" >
-    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="40" cy="40" r="38" stroke="#2e607e" stroke-width="1"/>
-      <circle cx="40" cy="40" r="28" stroke="#2e607e" stroke-width="0.5" stroke-dasharray="3 4"/>
-      <line x1="40" y1="2"  x2="40" y2="78" stroke="#2e607e" stroke-width="0.5" opacity="0.5"/>
-      <line x1="2"  y1="40" x2="78" y2="40" stroke="#2e607e" stroke-width="0.5" opacity="0.5"/>
-    </svg>
-  </div>
-  <div class="doodle" style="bottom:15%; left:2%; width:1px; height:120px; background:var(--sand-deep); opacity:0.25;"></div>
-  <div class="doodle" style="bottom:10%; left:3%; font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-light); opacity:0.3; font-family:var(--body);">research</div>
-  <div class="doodle" style="top:50%; right:2%; width:40px; height:1px; background:var(--ocean-light); opacity:0.25;"></div>
-  <div class="doodle" style="top:52%; right:2%; width:24px; height:1px; background:var(--ocean-light); opacity:0.18; margin-top:6px;"></div>
-  <div class="doodle" style="top:54%; right:2%; width:32px; height:1px; background:var(--ocean-light); opacity:0.12; margin-top:12px;"></div>
-
-  <div class="s-inner">
-    <div class="section-header-row reveal">
-      <div>
-        <p class="eyebrow ey-pink">Research blog</p>
-        <h2 class="s-heading">Findings from the <em>internet</em></h2>
-        <p class="s-sub">Web scraping, ML, and data deep-dives into whatever's trending — written up so anyone can follow along.</p>
-      </div>
-      <a href="posts" class="see-all-link">All posts →</a>
-    </div>
-    <div id="blog-content"></div>
-  </div>
-</section>
-
-<!-- wave: blog → projects -->
-<div class="wave-divider" style="background:var(--sand-pale);">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,16 C240,48 480,4 720,28 C960,48 1200,8 1440,20 L1440,48 L0,48 Z" fill="var(--warm-white)"/>
-  </svg>
-</div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="doodle" style="top:8%; left:3%; width:64px; opacity:0.18;">
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="60" height="60" stroke="#6baaa0" stroke-width="1"/>
-      <rect x="12" y="12" width="40" height="40" stroke="#6baaa0" stroke-width="0.5" stroke-dasharray="2 3"/>
-      <line x1="32" y1="2" x2="32" y2="62" stroke="#6baaa0" stroke-width="0.5" opacity="0.5"/>
-      <line x1="2"  y1="32" x2="62" y2="32" stroke="#6baaa0" stroke-width="0.5" opacity="0.5"/>
-    </svg>
-  </div>
-  <div class="doodle" style="top:10%; left:2%; font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-light); opacity:0.3; font-family:var(--body); font-weight:500; writing-mode:vertical-rl; margin-top:80px;">builds</div>
-  <div class="doodle" style="bottom:18%; right:3%; width:56px; opacity:0.15;">
-    <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="28" cy="28" r="26" stroke="#1b3a52" stroke-width="1"/>
-      <circle cx="28" cy="28" r="4" fill="#1b3a52" opacity="0.4"/>
-      <line x1="28" y1="2"  x2="28" y2="12" stroke="#1b3a52" stroke-width="1"/>
-      <line x1="28" y1="44" x2="28" y2="54" stroke="#1b3a52" stroke-width="1"/>
-      <line x1="2"  y1="28" x2="12" y2="28" stroke="#1b3a52" stroke-width="1"/>
-      <line x1="44" y1="28" x2="54" y2="28" stroke="#1b3a52" stroke-width="1"/>
-    </svg>
-  </div>
-  <div class="doodle" style="top:40%; right:2%; width:32px; height:1px; background:var(--seafoam); opacity:0.3;"></div>
-  <div class="doodle" style="top:44%; right:2%; width:20px; height:1px; background:var(--seafoam); opacity:0.2;"></div>
-
-  <div class="s-inner">
-    <div class="section-header-row reveal">
-      <div>
-        <p class="eyebrow ey-mint">Projects</p>
-        <h2 class="s-heading">Tools I'm <em>building</em></h2>
-        <p class="s-sub">Small apps and utilities that grew out of the research — built to make the next deep-dive faster.</p>
-      </div>
-      <a href="projects" class="see-all-link">All tools →</a>
-    </div>
-    <div id="projects-content"></div>
-  </div>
-</section>
-
-<!-- wave: projects → about -->
-<div class="wave-divider" style="background:var(--warm-white);">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,32 C300,8 600,44 900,20 C1100,4 1280,40 1440,28 L1440,48 L0,48 Z" fill="var(--seafoam-pale)"/>
-  </svg>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="doodle" style="top:6%; right:3%; width:72px; opacity:0.16;">
-    <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="36" cy="36" r="34" stroke="#6baaa0" stroke-width="1"/>
-      <circle cx="36" cy="36" r="22" stroke="#6baaa0" stroke-width="0.5"/>
-      <circle cx="36" cy="36" r="10" stroke="#6baaa0" stroke-width="0.5" stroke-dasharray="2 3"/>
-      <line x1="36" y1="2"  x2="36" y2="70" stroke="#6baaa0" stroke-width="0.5" opacity="0.4"/>
-      <line x1="2"  y1="36" x2="70" y2="36" stroke="#6baaa0" stroke-width="0.5" opacity="0.4"/>
-    </svg>
-  </div>
-  <div class="doodle" style="bottom:12%; left:2%; font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-light); opacity:0.28; font-family:var(--body); font-weight:500; writing-mode:vertical-rl;">engineer · artist</div>
-  <div class="doodle" style="top:35%; left:2%; width:1px; height:80px; background:var(--seafoam); opacity:0.22;"></div>
-  <div class="doodle" style="bottom:28%; right:3%; width:44px; height:1px; background:var(--ocean); opacity:0.15;"></div>
-  <div class="doodle" style="bottom:32%; right:3%; width:28px; height:1px; background:var(--ocean); opacity:0.1;"></div>
-
-  <div class="s-inner">
-    <div class="section-header-row reveal">
-      <div>
-        <p class="eyebrow ey-lav">About me</p>
-        <h2 class="s-heading">A bit about <em>who I am</em></h2>
-        <p class="s-sub">The short version: software engineer by day, curious data nerd and casual artist always.</p>
-      </div>
-    </div>
-    <div class="resume-card reveal">
-      <div class="resume-top">
-        <div>
-          <p class="resume-name">Ella Holl</p>
-          <p class="resume-role">Lead Software Engineer · data nerd · Boston, MA</p>
-        </div>
-        <a href="/downloads/ellaholl_resume.pdf" class="resume-download">Download résumé ↓</a>
-      </div>
-      <div class="resume-cols">
-        <div>
-          <div class="resume-block">
-            <p class="rb-label">My story</p>
-            <p class="rb-desc" style="margin-bottom:1.2rem;">I'm a software engineer who's a little too online — which is mostly how this blog happens. If something's trending and I can't stop thinking about it, I usually end up scraping the data behind it just to see what's actually going on.</p>
-            <p class="rb-desc">Outside of work I volunteer with the National Parks Service doing art in the park, and you'll usually find me with a paintbrush, a camera, or deep in a Wikipedia rabbit hole about something completely unrelated.</p>
-          </div>
-          <div class="resume-block">
-            <p class="rb-label">Where I've worked</p>
-            <div class="rb-entry">
-              <div class="rb-entry-top">
-                <span class="rb-role">Lead Software Engineer</span>
-                <span class="rb-period">Nov 2025 — Present</span>
-              </div>
-              <p class="rb-org">MORSE Corp. · Cambridge, MA</p>
-              <p class="rb-desc">Leading two engineering teams, working directly with external clients, and managing project schedules and deliverables across three client organizations.</p>
-            </div>
-            <div class="rb-entry">
-              <div class="rb-entry-top">
-                <span class="rb-role">Data Analyst Co-op</span>
-                <span class="rb-period">Jul 2022 — Dec 2022</span>
-              </div>
-              <p class="rb-org">Suffolk Construction · Boston, MA</p>
-              <p class="rb-desc">Delivered reports and insights to business stakeholders across cross-functional teams.</p>
-            </div>
-            <div class="rb-entry">
-              <div class="rb-entry-top">
-                <span class="rb-role">Applications Developer Co-op</span>
-                <span class="rb-period">Jul 2021 — Dec 2021</span>
-              </div>
-              <p class="rb-org">Bain Capital · Boston, MA</p>
-              <p class="rb-desc">Interfaced with business teams across the firm and delivered projects on schedule in a high-standards financial services environment.</p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="resume-block">
-            <p class="rb-label">What I'm into</p>
-            <div class="skill-row">
-              <span class="skill-chip">Python</span>
-              <span class="skill-chip">JavaScript</span>
-              <span class="skill-chip">Web Scraping</span>
-              <span class="skill-chip">ML / NLP</span>
-              <span class="skill-chip">Data Analysis</span>
-              <span class="skill-chip">Engineering Leadership</span>
-              <span class="skill-chip">Watercolour</span>
-              <span class="skill-chip">Film Photography</span>
-            </div>
-          </div>
-          <div class="resume-block">
-            <p class="rb-label">Education</p>
-            <div class="ed-entry">
-              <p class="ed-school">Northeastern University</p>
-              <p class="ed-degree">B.S. in Computer Engineering & Computer Science</p>
-              <p class="ed-year">May 2024</p>
-            </div>
-            <p class="rb-desc" style="margin-top:0.6rem;">Honors Society President, IEEE Eta Kappa Nu · Teaching Assistant & Tutor</p>
-          </div>
-          <div class="resume-block">
-            <p class="rb-label">Currently</p>
-            <p class="rb-desc">Based in Boston. Leading engineering teams at MORSE Corp., volunteering with the National Parks Service, and always working on some new data project on the side.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- wave: about → creative -->
-<div class="wave-divider" style="background:var(--seafoam-pale);">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,12 C200,44 500,4 800,36 C1050,56 1280,10 1440,24 L1440,48 L0,48 Z" fill="var(--warm-white)"/>
-  </svg>
-</div>
-
-<!-- CREATIVE -->
-<section id="creative">
-  <div class="doodle" style="top:6%; left:3%; width:60px; opacity:0.18;">
-    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="30" cy="30" r="28" stroke="#c8b89a" stroke-width="1"/>
-      <line x1="30" y1="2"  x2="30" y2="14" stroke="#c8b89a" stroke-width="1.5"/>
-      <line x1="30" y1="46" x2="30" y2="58" stroke="#c8b89a" stroke-width="1.5"/>
-      <line x1="2"  y1="30" x2="14" y2="30" stroke="#c8b89a" stroke-width="1.5"/>
-      <line x1="46" y1="30" x2="58" y2="30" stroke="#c8b89a" stroke-width="1.5"/>
-      <text x="30" y="26" text-anchor="middle" font-size="6" fill="#c8b89a" font-family="serif" opacity="0.8">N</text>
-      <text x="30" y="50" text-anchor="middle" font-size="6" fill="#c8b89a" font-family="serif" opacity="0.8">S</text>
-      <text x="50" y="32" text-anchor="middle" font-size="6" fill="#c8b89a" font-family="serif" opacity="0.8">E</text>
-      <text x="10" y="32" text-anchor="middle" font-size="6" fill="#c8b89a" font-family="serif" opacity="0.8">W</text>
-    </svg>
-  </div>
-  <div class="doodle" style="top:10%; right:3%; font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-light); opacity:0.28; font-family:var(--body); font-weight:500; writing-mode:vertical-rl;">paint · lens · make</div>
-  <div class="doodle" style="bottom:14%; right:3%; width:52px; opacity:0.15;">
-    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="48" height="48" stroke="#b5a48a" stroke-width="1"/>
-      <rect x="10" y="10" width="32" height="32" stroke="#b5a48a" stroke-width="0.5" stroke-dasharray="2 3"/>
-      <circle cx="26" cy="26" r="6" stroke="#b5a48a" stroke-width="0.5"/>
-    </svg>
-  </div>
-  <div class="doodle" style="top:50%; left:2%; width:1px; height:100px; background:var(--sand-deep); opacity:0.22;"></div>
-
-  <div class="s-inner">
-    <div class="section-header-row reveal">
-      <div>
-        <p class="eyebrow ey-pink">Creative</p>
-        <h2 class="s-heading">Art, design & <em>photography</em></h2>
-        <p class="s-sub">What I make when I close the laptop — painting, photography, and the occasional design experiment.</p>
-      </div>
-      <a href="gallery" class="see-all-link">View gallery →</a>
-    </div>
-    <div class="creative-bento">
-      <a href="gallery" class="bento b-tall reveal">
-        <div class="bento-inner">
-          <div class="bento-bg bb-art"></div>
-          <div class="bento-emoji">🎨</div>
-          <div class="bento-label">
-            <div class="bl-cat">Art & Illustration</div>
-            <div class="bl-title">Watercolour & Ink</div>
-            <span class="bento-pill">Botanicals · Portraits</span>
-          </div>
-        </div>
-      </a>
-      <a href="gallery" class="bento reveal rd1">
-        <div class="bento-inner">
-          <div class="bento-bg bb-photo"></div>
-          <div class="bento-emoji">📷</div>
-          <div class="bento-label">
-            <div class="bl-cat">Photography</div>
-            <div class="bl-title">Film & Digital</div>
-          </div>
-        </div>
-      </a>
-      <a href="gallery" class="bento reveal rd2">
-        <div class="bento-inner">
-          <div class="bento-bg bb-design"></div>
-          <div class="bento-emoji">✏️</div>
-          <div class="bento-label">
-            <div class="bl-cat">Design</div>
-            <div class="bl-title">UI Experiments</div>
-          </div>
-        </div>
-      </a>
-      <a href="gallery" class="bento b-wide reveal rd1">
-        <div class="bento-inner">
-          <div class="bento-bg bb-misc"></div>
-          <div class="bento-emoji">◎</div>
-          <div class="bento-label">
-            <div class="bl-cat">Currently making</div>
-            <div class="bl-title">A small zine of data-inspired illustrations</div>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- wave: creative → subscribe -->
-<div class="wave-divider" style="background:var(--warm-white);">
-  <svg viewBox="0 0 1440 48" preserveAspectRatio="none" height="48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,28 C180,4 420,44 720,18 C980,0 1240,40 1440,22 L1440,48 L0,48 Z" fill="var(--ocean)"/>
-  </svg>
-</div>
-
-<!-- SUBSCRIBE -->
-<section id="subscribe">
-  <div class="doodle" style="top:20%; left:4%; width:1px; height:60px; background:rgba(216,236,234,0.3);"></div>
-  <div class="doodle" style="top:20%; left:6%; width:1px; height:40px; background:rgba(216,236,234,0.15); margin-top:8px;"></div>
-  <div class="doodle" style="bottom:20%; right:4%; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(216,236,234,0.3); font-family:var(--body); font-weight:500;">stay curious</div>
-
-  <div class="s-inner">
-    <div class="sub-wrap reveal">
-      <div class="sub-text">
-        <p class="eyebrow ey-pink">Stay in the loop</p>
-        <h2 class="s-heading">New post, <em>straight to your inbox</em></h2>
-        <p class="s-sub">No spam, just a note whenever I publish something new.</p>
-      </div>
-      <form class="sub-form" onsubmit="return false;">
-        <input type="email" placeholder="you@email.com" />
-        <button class="sub-btn">Subscribe</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="footer-logo">Ella Holl</span>
-  <p>© 2026 — built with curiosity & caffeine</p>
-  <ul class="footer-links">
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#creative">Creative</a></li>
-  </ul>
-</footer>
-
-<script type="module" src="js/main.js"></script>
+</script>
 </body>
 </html>
