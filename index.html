@@ -14,7 +14,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.4;-webkit-font-smoothing:antialiased}
 header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;flex-wrap:wrap}
-.logo{padding:0;font-size:22px;font-weight:500;letter-spacing:-.02em}
+.logo{padding:8px 20px;margin-left:-20px;border-radius:999px;transition:background .2s,color .2s;font-size:22px;font-weight:500;letter-spacing:-.02em}
 nav.filters{order:2;display:flex;gap:4px;flex-wrap:wrap}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
@@ -24,6 +24,7 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #theme,#mode,#about{width:40px;height:40px;display:grid;place-items:center;border-radius:50%}
 .tools{order:3;display:flex;gap:8px;margin-left:auto}
 .logo{order:1}
+.logo[aria-pressed="true"]{background:var(--pill);color:var(--pillfg)}
 @media (max-width:900px){.tools{order:2}nav.filters{order:3;flex-basis:100%}}
 .to-work{display:none}
 body[data-mode="personal"] .to-work{display:block}body[data-mode="personal"] .to-personal{display:none}
@@ -61,9 +62,9 @@ section.info a{color:var(--fg)}
 </head>
 <body data-view="work">
 <header>
-  <div class="logo">Ella Holl</div>
+  <button class="logo" id="home" aria-pressed="true" title="Show everything">Ella Holl</button>
   <nav class="filters" id="filters" aria-label="Filter work">
-    <button aria-pressed="true" data-f="all">everything</button>
+    
     <button aria-pressed="false" data-f="coding">coding</button>
     <button aria-pressed="false" data-f="research">research</button>
     <button aria-pressed="false" data-f="design">design</button>
@@ -112,15 +113,18 @@ items.forEach(function(it){
   a.addEventListener('click',function(e){e.preventDefault()});
   grid.appendChild(a);
 });
-var fbox=document.getElementById('filters');
+var fbox=document.getElementById('filters'),home=document.getElementById('home');
+home.addEventListener('click',function(){f='all';apply()});
 function apply(){
+  fbox.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f===f)});
+  home.setAttribute('aria-pressed',f==='all');
   document.querySelectorAll('.card').forEach(function(c){c.classList.toggle('hide',c.dataset.g!==mode||(f!=='all'&&c.dataset.c!==f))});
 }
 function buildFilters(){
   fbox.innerHTML='';
-  ['all'].concat(groups[mode]).forEach(function(k){
-    var b=document.createElement('button');b.dataset.f=k;b.textContent=k==='all'?'everything':k;b.setAttribute('aria-pressed',k===f);
-    b.addEventListener('click',function(){f=k;fbox.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});apply()});
+  groups[mode].forEach(function(k){
+    var b=document.createElement('button');b.dataset.f=k;b.textContent=k;b.setAttribute('aria-pressed',k===f);
+    b.addEventListener('click',function(){f=(f===k?'all':k);apply()});
     fbox.appendChild(b);
   });
 }
