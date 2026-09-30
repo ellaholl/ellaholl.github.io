@@ -22,6 +22,24 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 .filters button:hover{color:var(--fg)}
 .filters button[aria-pressed="true"]{background:var(--pill);color:var(--pillfg)}
 #theme,#mode,#about{width:40px;height:40px;display:grid;place-items:center;border-radius:50%}
+#detail{display:none;padding:8px 24px 80px;max-width:1100px;margin:0 auto}
+body[data-view="detail"] #detail{display:block}
+body[data-view="detail"] main,body[data-view="detail"] #filters{display:none}
+.back{display:inline-flex;gap:8px;align-items:center;padding:10px 18px 10px 14px;margin:0 0 24px -14px;border-radius:999px;font-size:17px;color:var(--mute)}
+.back:hover{color:var(--fg)}
+#detail h1{font-size:clamp(36px,6vw,72px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0 0 10px;outline:none}
+#detail .tags{margin:0 0 32px;color:var(--mute);font-size:18px}
+#detail .art{height:min(64vh,560px)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;margin:40px 0 32px;padding-top:24px;border-top:1px solid color-mix(in srgb,var(--mute) 35%,transparent)}
+.meta h4{margin:0 0 6px;font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.meta p{margin:0;font-size:18px}
+#detail .desc{font-size:22px;line-height:1.5;max-width:720px;margin:0 0 56px}
+.pn{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pn a{display:block;padding:18px 24px;border-radius:24px;border:1px solid color-mix(in srgb,var(--mute) 30%,transparent);color:var(--fg);text-decoration:none;min-width:200px}
+.pn a:hover{background:color-mix(in srgb,var(--mute) 12%,transparent)}
+.pn small{display:block;color:var(--mute);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.pn .nx{margin-left:auto;text-align:right}
+canvas#spark{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20}
 .tools{order:3;display:flex;gap:8px;margin-left:auto}
 .logo{order:1}
 .logo[aria-pressed="true"]{background:var(--pill);color:var(--pillfg)}
@@ -60,7 +78,7 @@ section.info a{color:var(--fg)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
-<body data-view="work">
+<body data-view="work" data-mode="work">
 <header>
   <button class="logo" id="home" aria-pressed="true" title="Show everything">Ella Holl</button>
   <nav class="filters" id="filters" aria-label="Filter work">
@@ -83,6 +101,8 @@ section.info a{color:var(--fg)}
   <h4>Follow me</h4>
   <div class="socials"><a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a><a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 10v8M6 6.5v.01M11 18v-8M11 13c0-2 1.5-3 3-3s3 1 3 3v5"/></svg></a><a href="#" aria-label="Dribbble"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5 7c5 1 9 0 13-3M3.5 12.5c5-1 10 0 14 6M8.5 3.5c3 3 5 8 6 17"/></svg></a></div>
 </div>
+<article id="detail" aria-live="polite"></article>
+<canvas id="spark" aria-hidden="true"></canvas>
 <script>
 var items=[
  {t:"Paper & Pine Identity",c:"design",tags:"#branding #logo #packaging",h:360,bg:"linear-gradient(160deg,#2f4a3a,#1d3026)",big:"P&P"},
@@ -106,11 +126,35 @@ var codeA='<b>const</b> board = <b>await</b> load();\n<b>for</b> (<b>const</b> s
 var codeB='$ jt init my-tool\n<i>✔</i> created package.json\n<i>✔</i> added tests\n$ jt run --watch\n<i>listening…</i>';
 var groups={work:['coding','research','design'],personal:['photography','art','personal']};
 var grid=document.getElementById('grid'),mode='work',f='all';
-items.forEach(function(it){
-  var a=document.createElement('a');a.className='card';a.dataset.c=it.c;a.dataset.g=groups.personal.indexOf(it.c)>-1?'personal':'work';a.href='#';a.setAttribute('role','listitem');
+var info={
+"signal-board":["2026","Design & development","React, TypeScript, D3","A live dashboard that surfaces small changes in product metrics before they become big ones, built around readable charts and quiet notifications."],
+"sleep-screens":["2025","Lead researcher","Survey, R, Figma","A survey of 412 people on evening screen habits and how they say they sleep. The write-up covers method, findings and design implications."],
+"chromatic-dreams":["2026","Artist","Blender, Procreate","A series of imagined planets over spiky alien landscapes, exploring how far saturated colour can go before it stops feeling natural."],
+"sourdough-log":["2026","Baker","Flour, water, patience","A running notebook of starter feeds, hydration experiments and loaves that did not quite make it."],
+"color-theory":["2025","Artist","Shaders, Figma","Blurred gradients that explore how colours mix, borrowing from light rather than pigment."],
+"tiny-cli-toolkit":["2025","Developer","Node.js, TypeScript","A small set of command-line helpers for scaffolding projects and running watch tasks, released as open source."],
+"how-people-skim-docs":["2024","Researcher","Eye tracking, Python","A six-week study of how developers scan documentation pages and where they give up."],
+"night-walks":["2026","Photographer","35mm film","Late walks through the city after dark, shot on film with whatever light was available."],
+"urban-fragments":["2025","Artist","Photoshop, Blender","A dark forest scene lit by glowing orbs, assembled from photographs and 3D renders."],
+"accessible-forms-kit":["2025","Developer","HTML, CSS, ARIA","Form components tested with screen readers and keyboard-only use, aiming for AA contrast and clear error messages."],
+"reading-list-2026":["2026","Reader","A notebook","Books read this year, with a line or two about each."],
+"interview-synthesis":["2024","Researcher","Miro, Dovetail","Notes from 14 interviews turned into an affinity map and a short list of insights the team could act on."],
+"paper-pine-identity":["2025","Designer","Illustrator, Figma","A brand identity for a small stationery company: logo, colour palette, packaging and type."],
+"orbit-wayfinding":["2024","Designer","Illustrator, InDesign","A signage system for a transit line with bold type, clear arrows and consistent colour coding."],
+"harbor-at-dusk":["2026","Photographer","Film, long exposure","The harbour just after sunset, with a long exposure to smooth the water."],
+"fog-season":["2025","Photographer","35mm film","Foggy mornings on the coast, where the landscape almost disappears."]
+};
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function grp(it){return groups.personal.indexOf(it.c)>-1?'personal':'work'}
+function art(it,h){
   var inner=it.code?'<div class="code">'+(it.alt?codeB:codeA)+'</div>':(it.big?'<div class="big" style="'+(it.dark?'color:#1c2a52':'')+'">'+it.big+'</div>':'');
-  a.innerHTML='<div class="art" style="height:'+it.h+'px;background:'+it.bg+'">'+inner+'</div><h3>'+it.t+'</h3><p>'+it.tags+'</p>';
-  a.addEventListener('click',function(e){e.preventDefault()});
+  return '<div class="art" style="'+(h?'height:'+h+'px;':'')+'background:'+it.bg+'">'+inner+'</div>';
+}
+items.forEach(function(it){
+  it.s=slug(it.t);
+  var a=document.createElement('a');a.className='card';a.dataset.c=it.c;a.dataset.g=grp(it);a.href='#/'+it.s;
+  a.innerHTML=art(it,it.h)+'<h3></h3><p>'+it.tags+'</p>';
+  a.querySelector('h3').textContent=it.t;
   grid.appendChild(a);
 });
 var fbox=document.getElementById('filters'),home=document.getElementById('home');
@@ -152,6 +196,65 @@ document.addEventListener('click',function(e){if(!pop.hidden&&!pop.contains(e.ta
 var sm='work';try{sm=localStorage.getItem('mode')||'work'}catch(e){}
 setMode(sm==='personal'?'personal':'work');
 
+
+var det=document.getElementById('detail'),saveY=0,wasDetail=false;
+function route(){
+  var m=location.hash.match(/^#\/(.+)/),it=null;
+  if(m)items.forEach(function(x){if(x.s===m[1])it=x});
+  if(!it){
+    document.body.dataset.view='work';document.title='Ella Holl';
+    if(wasDetail){scrollTo(0,saveY)}
+    wasDetail=false;return;
+  }
+  if(!wasDetail)saveY=scrollY;
+  wasDetail=true;
+  if(grp(it)!==mode)setMode(grp(it));
+  var list=items.filter(function(x){return grp(x)===grp(it)}),i=list.indexOf(it);
+  var pv=list[(i+list.length-1)%list.length],nx=list[(i+1)%list.length],d=info[it.s]||["","","",""];
+  det.innerHTML='<a class="back" href="#/"><span aria-hidden="true">←</span> Back</a><h1 tabindex="-1"></h1><p class="tags">'+it.tags+'</p>'+art(it,0)+
+   '<div class="meta"><div><h4>Year</h4><p>'+d[0]+'</p></div><div><h4>Role</h4><p>'+d[1]+'</p></div><div><h4>Tools</h4><p>'+d[2]+'</p></div></div><p class="desc">'+d[3]+'</p>'+
+   '<div class="pn"><a href="#/'+pv.s+'"><small>Previous</small><span class="pt"></span></a><a class="nx" href="#/'+nx.s+'"><small>Next</small><span class="nt"></span></a></div>';
+  det.querySelector('h1').textContent=it.t;det.querySelector('.pt').textContent=pv.t;det.querySelector('.nt').textContent=nx.t;
+  document.title=it.t+' – Ella Holl';
+  document.body.dataset.view='detail';
+  scrollTo(0,0);det.querySelector('h1').focus({preventScroll:true});
+}
+addEventListener('hashchange',route);
+function leaveDetail(){if(location.hash.length>2)location.hash='#/'}
+document.getElementById('home').addEventListener('click',leaveDetail);
+document.getElementById('mode').addEventListener('click',leaveDetail);
+route();
+
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion:reduce)');
+  var cv=document.getElementById('spark'),cx=cv.getContext('2d'),ps=[],run=false,hue=0,lx=-99,ly=-99,dpr=Math.min(devicePixelRatio||1,2);
+  function size(){cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+  size();addEventListener('resize',size);
+  function star(x,y,r){cx.beginPath();cx.moveTo(x,y-r);cx.quadraticCurveTo(x,y,x+r,y);cx.quadraticCurveTo(x,y,x,y+r);cx.quadraticCurveTo(x,y,x-r,y);cx.quadraticCurveTo(x,y,x,y-r);cx.fill()}
+  function tick(){
+    cx.clearRect(0,0,innerWidth,innerHeight);
+    ps=ps.filter(function(p){return p.l>0});
+    ps.forEach(function(p){
+      p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.l-=.02;p.a+=.1;
+      cx.globalAlpha=Math.max(p.l,0);cx.fillStyle='hsl('+p.h+',100%,62%)';
+      star(p.x,p.y,p.s*(.6+.4*Math.sin(p.a)));
+    });
+    cx.globalAlpha=1;
+    if(ps.length){requestAnimationFrame(tick)}else{run=false;cx.clearRect(0,0,innerWidth,innerHeight)}
+  }
+  addEventListener('pointermove',function(e){
+    if(document.body.dataset.mode!=='personal'||rm.matches)return;
+    var dx=e.clientX-lx,dy=e.clientY-ly;
+    if(dx*dx+dy*dy<64)return;
+    lx=e.clientX;ly=e.clientY;
+    for(var i=0;i<2;i++){
+      hue=(hue+14)%360;
+      ps.push({x:lx+(Math.random()-.5)*8,y:ly+(Math.random()-.5)*8,vx:(Math.random()-.5)*1.6,vy:Math.random()*-1.2,l:1,h:hue,s:5+Math.random()*7,a:Math.random()*6});
+    }
+    if(ps.length>150)ps.splice(0,ps.length-150);
+    if(!run){run=true;requestAnimationFrame(tick)}
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
