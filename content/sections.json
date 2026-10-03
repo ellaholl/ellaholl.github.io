@@ -1,0 +1,8 @@
+[
+  { "id": "coding",      "group": "work" },
+  { "id": "research",    "group": "work" },
+  { "id": "design",      "group": "work" },
+  { "id": "photography", "group": "personal" },
+  { "id": "art",         "group": "personal" },
+  { "id": "personal",    "group": "personal" }
+]
