@@ -39,6 +39,14 @@ body[data-view="detail"] main,body[data-view="detail"] #filters{display:none}
 .pn a:hover{background:color-mix(in srgb,var(--mute) 12%,transparent)}
 .pn small{display:block;color:var(--mute);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
 .pn .nx{margin-left:auto;text-align:right}
+.art img{display:block;width:100%;height:auto}
+#detail .art.im{height:auto}#detail .art img{max-height:70vh;object-fit:cover}
+.prose p{margin:0 0 1em}.prose h2{font-size:28px;font-weight:500;letter-spacing:-.02em;margin:1.6em 0 .5em}.prose h3,.prose h4{font-size:22px;font-weight:500;margin:1.4em 0 .4em}
+.prose ul,.prose ol{padding-left:1.2em;margin:0 0 1em}.prose a{color:var(--fg)}
+.prose img{display:block;max-width:100%;height:auto;border-radius:24px;margin:1.2em 0}
+.prose pre{background:color-mix(in srgb,var(--mute) 14%,transparent);padding:16px;border-radius:16px;overflow-x:auto;font-size:15px;line-height:1.5}
+.prose code{font-family:ui-monospace,Menlo,monospace;font-size:.9em}
+.prose blockquote{margin:1em 0;padding-left:16px;border-left:3px solid var(--mute);color:var(--mute)}
 canvas#spark{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20}
 .tools{order:3;display:flex;gap:8px;margin-left:auto}
 .logo{order:1}
@@ -101,60 +109,29 @@ section.info a{color:var(--fg)}
   <h4>Follow me</h4>
   <div class="socials"><a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a><a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 10v8M6 6.5v.01M11 18v-8M11 13c0-2 1.5-3 3-3s3 1 3 3v5"/></svg></a><a href="#" aria-label="Dribbble"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5 7c5 1 9 0 13-3M3.5 12.5c5-1 10 0 14 6M8.5 3.5c3 3 5 8 6 17"/></svg></a></div>
 </div>
+<script id="posts" type="application/json">{"sections":[{"id":"coding","group":"work"},{"id":"research","group":"work"},{"id":"design","group":"work"},{"id":"photography","group":"personal"},{"id":"art","group":"personal"},{"id":"personal","group":"personal"}],"posts":[{"slug":"chromatic-dreams","section":"art","title":"Chromatic Dreams","date":"2026-06-15","year":"2026","tags":["illustration","digital-art","abstract"],"role":"Artist","tools":"Blender, Procreate","cover":"radial-gradient(circle at 50% 45%,#f4b06a 0 22%,transparent 23%),linear-gradient(180deg,#3a1a6b,#d63a68 70%,#ff6a5a)","label":"","labelColor":"","height":460,"html":"\u003cp>A series of imagined planets over spiky alien landscapes, exploring how far saturated colour can go before it stops feeling natural.\u003c/p>"},{"slug":"harbor-at-dusk","section":"photography","title":"Harbor at Dusk","date":"2026-06-15","year":"2026","tags":["film","coast","long-exposure"],"role":"Photographer","tools":"Film, long exposure","cover":"linear-gradient(180deg,#f6b58a,#c56b7e 45%,#2c3557 75%,#131a33)","label":"","labelColor":"","height":400,"html":"\u003cp>The harbour just after sunset, with a long exposure to smooth the water.\u003c/p>"},{"slug":"night-walks","section":"photography","title":"Night Walks","date":"2026-06-15","year":"2026","tags":["photography","film","city"],"role":"Photographer","tools":"35mm film","cover":"radial-gradient(circle at 60% 40%,#ffb347 0 6%,transparent 7%),linear-gradient(180deg,#0d0d14,#1f1a2b 60%,#3b2a2a)","label":"","labelColor":"","height":420,"html":"\u003cp>Late walks through the city after dark, shot on film with whatever light was available.\u003c/p>"},{"slug":"reading-list-2026","section":"personal","title":"Reading List 2026","date":"2026-06-15","year":"2026","tags":["books","reading","year"],"role":"Reader","tools":"A notebook","cover":"repeating-linear-gradient(90deg,#c7513a 0 22px,#e9a23b 22px 44px,#3b6e8f 44px 66px,#2f4a3a 66px 88px)","label":"","labelColor":"","height":300,"html":"\u003cp>Books read this year, with a line or two about each.\u003c/p>"},{"slug":"signal-board","section":"coding","title":"Signal Board","date":"2026-06-15","year":"2026","tags":["react","dashboard","typescript"],"role":"Design & development","tools":"React, TypeScript, D3","cover":"linear-gradient(160deg,#0f1a2b,#16283f)","label":"\u003c/>","labelColor":"","height":300,"html":"\u003cp>A live dashboard that surfaces small changes in product metrics before they become big ones, built around readable charts and quiet notifications.\u003c/p>"},{"slug":"sourdough-log","section":"personal","title":"Sourdough Log","date":"2026-06-15","year":"2026","tags":["baking","notes","weekends"],"role":"Baker","tools":"Flour, water, patience","cover":"radial-gradient(ellipse at 50% 60%,#e8c48a 0 35%,transparent 36%),linear-gradient(#f3e6d0,#d9b98a)","label":"","labelColor":"","height":280,"html":"\u003cp>A running notebook of starter feeds, hydration experiments and loaves that did not quite make it.\u003c/p>"},{"slug":"accessible-forms-kit","section":"coding","title":"Accessible Forms Kit","date":"2025-06-15","year":"2025","tags":["a11y","components","css"],"role":"Developer","tools":"HTML, CSS, ARIA","cover":"linear-gradient(135deg,#5b8cff,#7be0c3)","label":"AA+","labelColor":"","height":260,"html":"\u003cp>Form components tested with screen readers and keyboard-only use, aiming for AA contrast and clear error messages.\u003c/p>"},{"slug":"color-theory","section":"art","title":"Color Theory","date":"2025-06-15","year":"2025","tags":["abstract","digital","experimental"],"role":"Artist","tools":"Shaders, Figma","cover":"radial-gradient(circle at 20% 60%,#ff9a3c,transparent 45%),radial-gradient(circle at 70% 20%,#2a9dff,transparent 50%),radial-gradient(circle at 60% 90%,#ff4fd8,transparent 45%),#ffd27a","label":"","labelColor":"","height":250,"html":"\u003cp>Blurred gradients that explore how colours mix, borrowing from light rather than pigment.\u003c/p>"},{"slug":"fog-season","section":"photography","title":"Fog Season","date":"2025-06-15","year":"2025","tags":["landscape","morning","35mm"],"role":"Photographer","tools":"35mm film","cover":"linear-gradient(180deg,#dfe4e6,#aab6ba 60%,#6f7f7c)","label":"","labelColor":"","height":300,"html":"\u003cp>Foggy mornings on the coast, where the landscape almost disappears.\u003c/p>"},{"slug":"paper-pine-identity","section":"design","title":"Paper & Pine Identity","date":"2025-06-15","year":"2025","tags":["branding","logo","packaging"],"role":"Designer","tools":"Illustrator, Figma","cover":"linear-gradient(160deg,#2f4a3a,#1d3026)","label":"P&P","labelColor":"","height":360,"html":"\u003cp>A brand identity for a small stationery company: logo, colour palette, packaging and type.\u003c/p>"},{"slug":"sleep-screens","section":"research","title":"Sleep & Screens","date":"2025-06-15","year":"2025","tags":["survey","ux-research","sleep"],"role":"Lead researcher","tools":"Survey, R, Figma","cover":"radial-gradient(circle at 30% 30%,#ffd6a5,transparent 55%),radial-gradient(circle at 75% 80%,#9bb7ff,transparent 55%),#3a3f7a","label":"n = 412","labelColor":"","height":380,"html":"\u003cp>A survey of 412 people on evening screen habits and how they say they sleep. The write-up covers method, findings and design implications.\u003c/p>"},{"slug":"tiny-cli-toolkit","section":"coding","title":"Tiny CLI Toolkit","date":"2025-06-15","year":"2025","tags":["node","cli","open-source"],"role":"Developer","tools":"Node.js, TypeScript","cover":"linear-gradient(160deg,#101418,#1c2530)","label":"\u003c/>","labelColor":"","height":340,"html":"\u003cp>A small set of command-line helpers for scaffolding projects and running watch tasks, released as open source.\u003c/p>"},{"slug":"urban-fragments","section":"art","title":"Urban Fragments","date":"2025-06-15","year":"2025","tags":["illustration","urban","collage"],"role":"Artist","tools":"Photoshop, Blender","cover":"radial-gradient(circle at 50% 50%,#ff9d3c 0 8%,transparent 9%),linear-gradient(180deg,#0e0a08,#2a1408 75%,#0e0a08)","label":"","labelColor":"","height":380,"html":"\u003cp>A dark forest scene lit by glowing orbs, assembled from photographs and 3D renders.\u003c/p>"},{"slug":"how-people-skim-docs","section":"research","title":"How People Skim Docs","date":"2024-06-15","year":"2024","tags":["eye-tracking","reading","study"],"role":"Researcher","tools":"Eye tracking, Python","cover":"linear-gradient(120deg,#e8f0ff,#c9d9ff)","label":"6 weeks","labelColor":"#1c2a52","height":300,"html":"\u003cp>A six-week study of how developers scan documentation pages and where they give up.\u003c/p>"},{"slug":"interview-synthesis","section":"research","title":"Interview Synthesis","date":"2024-06-15","year":"2024","tags":["interviews","affinity-map","insights"],"role":"Researcher","tools":"Miro, Dovetail","cover":"radial-gradient(circle at 20% 25%,#ffe27a 0 9%,transparent 10%),radial-gradient(circle at 60% 40%,#ff9ab0 0 9%,transparent 10%),radial-gradient(circle at 35% 70%,#8fe0b0 0 9%,transparent 10%),radial-gradient(circle at 80% 75%,#9bc4ff 0 9%,transparent 10%),#f4efe6","label":"","labelColor":"","height":340,"html":"\u003cp>Notes from 14 interviews turned into an affinity map and a short list of insights the team could act on.\u003c/p>"},{"slug":"orbit-wayfinding","section":"design","title":"Orbit Wayfinding","date":"2024-06-15","year":"2024","tags":["signage","systems","typography"],"role":"Designer","tools":"Illustrator, InDesign","cover":"linear-gradient(120deg,#ffcf3f,#ff9d1f)","label":"→ B4","labelColor":"#1c2a52","height":280,"html":"\u003cp>A signage system for a transit line with bold type, clear arrows and consistent colour coding.\u003c/p>"}]}</script>
 <article id="detail" aria-live="polite"></article>
 <canvas id="spark" aria-hidden="true"></canvas>
 <script>
-var items=[
- {t:"Paper & Pine Identity",c:"design",tags:"#branding #logo #packaging",h:360,bg:"linear-gradient(160deg,#2f4a3a,#1d3026)",big:"P&P"},
- {t:"Orbit Wayfinding",c:"design",tags:"#signage #systems #typography",h:280,bg:"linear-gradient(120deg,#ffcf3f,#ff9d1f)",big:"→ B4",dark:true},
- {t:"Harbor at Dusk",c:"photography",tags:"#film #coast #long-exposure",h:400,bg:"linear-gradient(180deg,#f6b58a,#c56b7e 45%,#2c3557 75%,#131a33)"},
- {t:"Fog Season",c:"photography",tags:"#landscape #morning #35mm",h:300,bg:"linear-gradient(180deg,#dfe4e6,#aab6ba 60%,#6f7f7c)"},
- {t:"Signal Board",c:"coding",tags:"#react #dashboard #typescript",h:300,bg:"linear-gradient(160deg,#0f1a2b,#16283f)",code:true},
- {t:"Sleep & Screens",c:"research",tags:"#survey #ux-research #sleep",h:380,bg:"radial-gradient(circle at 30% 30%,#ffd6a5,transparent 55%),radial-gradient(circle at 75% 80%,#9bb7ff,transparent 55%),#3a3f7a",big:"n = 412"},
- {t:"Chromatic Dreams",c:"art",tags:"#illustration #digital-art #abstract",h:460,bg:"radial-gradient(circle at 50% 45%,#f4b06a 0 22%,transparent 23%),linear-gradient(180deg,#3a1a6b,#d63a68 70%,#ff6a5a)"},
- {t:"Sourdough Log",c:"personal",tags:"#baking #notes #weekends",h:280,bg:"radial-gradient(ellipse at 50% 60%,#e8c48a 0 35%,transparent 36%),linear-gradient(#f3e6d0,#d9b98a)"},
- {t:"Color Theory",c:"art",tags:"#abstract #digital #experimental",h:250,bg:"radial-gradient(circle at 20% 60%,#ff9a3c,transparent 45%),radial-gradient(circle at 70% 20%,#2a9dff,transparent 50%),radial-gradient(circle at 60% 90%,#ff4fd8,transparent 45%),#ffd27a"},
- {t:"Tiny CLI Toolkit",c:"coding",tags:"#node #cli #open-source",h:340,bg:"linear-gradient(160deg,#101418,#1c2530)",code:true,alt:true},
- {t:"How People Skim Docs",c:"research",tags:"#eye-tracking #reading #study",h:300,bg:"linear-gradient(120deg,#e8f0ff,#c9d9ff)",big:"6 weeks",dark:true},
- {t:"Night Walks",c:"photography",tags:"#photography #film #city",h:420,bg:"radial-gradient(circle at 60% 40%,#ffb347 0 6%,transparent 7%),linear-gradient(180deg,#0d0d14,#1f1a2b 60%,#3b2a2a)"},
- {t:"Urban Fragments",c:"art",tags:"#illustration #urban #collage",h:380,bg:"radial-gradient(circle at 50% 50%,#ff9d3c 0 8%,transparent 9%),linear-gradient(180deg,#0e0a08,#2a1408 75%,#0e0a08)"},
- {t:"Accessible Forms Kit",c:"coding",tags:"#a11y #components #css",h:260,bg:"linear-gradient(135deg,#5b8cff,#7be0c3)",big:"AA+"},
- {t:"Reading List 2026",c:"personal",tags:"#books #reading #year",h:300,bg:"repeating-linear-gradient(90deg,#c7513a 0 22px,#e9a23b 22px 44px,#3b6e8f 44px 66px,#2f4a3a 66px 88px)"},
- {t:"Interview Synthesis",c:"research",tags:"#interviews #affinity-map #insights",h:340,bg:"radial-gradient(circle at 20% 25%,#ffe27a 0 9%,transparent 10%),radial-gradient(circle at 60% 40%,#ff9ab0 0 9%,transparent 10%),radial-gradient(circle at 35% 70%,#8fe0b0 0 9%,transparent 10%),radial-gradient(circle at 80% 75%,#9bc4ff 0 9%,transparent 10%),#f4efe6"}
-];
-var codeA='<b>const</b> board = <b>await</b> load();\n<b>for</b> (<b>const</b> s <b>of</b> board.signals) {\n  <b>if</b> (s.delta &gt; <i>0.2</i>) {\n    notify(s.name, s.delta);\n  }\n}\n<b>export</b> <b>default</b> board;';
-var codeB='$ jt init my-tool\n<i>✔</i> created package.json\n<i>✔</i> added tests\n$ jt run --watch\n<i>listening…</i>';
-var groups={work:['coding','research','design'],personal:['photography','art','personal']};
+var DATA=JSON.parse(document.getElementById('posts').textContent);
+var items=DATA.posts.map(function(p){return {t:p.title,c:p.section,tags:p.tags.map(function(x){return '#'+x}).join(' '),h:p.height,cover:p.cover,big:p.label,lc:p.labelColor,s:p.slug,html:p.html,year:p.year,role:p.role,tools:p.tools}});
+var groups={work:[],personal:[]};
+DATA.sections.forEach(function(x){if(DATA.posts.some(function(p){return p.section===x.id}))groups[x.group].push(x.id)});
 var grid=document.getElementById('grid'),mode='work',f='all';
-var info={
-"signal-board":["2026","Design & development","React, TypeScript, D3","A live dashboard that surfaces small changes in product metrics before they become big ones, built around readable charts and quiet notifications."],
-"sleep-screens":["2025","Lead researcher","Survey, R, Figma","A survey of 412 people on evening screen habits and how they say they sleep. The write-up covers method, findings and design implications."],
-"chromatic-dreams":["2026","Artist","Blender, Procreate","A series of imagined planets over spiky alien landscapes, exploring how far saturated colour can go before it stops feeling natural."],
-"sourdough-log":["2026","Baker","Flour, water, patience","A running notebook of starter feeds, hydration experiments and loaves that did not quite make it."],
-"color-theory":["2025","Artist","Shaders, Figma","Blurred gradients that explore how colours mix, borrowing from light rather than pigment."],
-"tiny-cli-toolkit":["2025","Developer","Node.js, TypeScript","A small set of command-line helpers for scaffolding projects and running watch tasks, released as open source."],
-"how-people-skim-docs":["2024","Researcher","Eye tracking, Python","A six-week study of how developers scan documentation pages and where they give up."],
-"night-walks":["2026","Photographer","35mm film","Late walks through the city after dark, shot on film with whatever light was available."],
-"urban-fragments":["2025","Artist","Photoshop, Blender","A dark forest scene lit by glowing orbs, assembled from photographs and 3D renders."],
-"accessible-forms-kit":["2025","Developer","HTML, CSS, ARIA","Form components tested with screen readers and keyboard-only use, aiming for AA contrast and clear error messages."],
-"reading-list-2026":["2026","Reader","A notebook","Books read this year, with a line or two about each."],
-"interview-synthesis":["2024","Researcher","Miro, Dovetail","Notes from 14 interviews turned into an affinity map and a short list of insights the team could act on."],
-"paper-pine-identity":["2025","Designer","Illustrator, Figma","A brand identity for a small stationery company: logo, colour palette, packaging and type."],
-"orbit-wayfinding":["2024","Designer","Illustrator, InDesign","A signage system for a transit line with bold type, clear arrows and consistent colour coding."],
-"harbor-at-dusk":["2026","Photographer","Film, long exposure","The harbour just after sunset, with a long exposure to smooth the water."],
-"fog-season":["2025","Photographer","35mm film","Foggy mornings on the coast, where the landscape almost disappears."]
-};
 function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function grp(it){return groups.personal.indexOf(it.c)>-1?'personal':'work'}
+function qa(v){return String(v).replace(/"/g,'&quot;')}
 function art(it,h){
-  var inner=it.code?'<div class="code">'+(it.alt?codeB:codeA)+'</div>':(it.big?'<div class="big" style="'+(it.dark?'color:#1c2a52':'')+'">'+it.big+'</div>':'');
-  return '<div class="art" style="'+(h?'height:'+h+'px;':'')+'background:'+it.bg+'">'+inner+'</div>';
+  if(/\.(jpe?g|png|webp|gif|avif|svg)(\?.*)?$/i.test(it.cover))return '<div class="art im"><img src="'+qa(it.cover)+'" alt="" loading="lazy"></div>';
+  var inner=it.big?'<div class="big" style="color:'+qa(it.lc||'#fff')+'"></div>':'';
+  return '<div class="art" style="'+(h?'height:'+h+'px;':'')+'background:'+qa(it.cover)+'">'+inner+'</div>';
 }
 items.forEach(function(it){
   it.s=slug(it.t);
   var a=document.createElement('a');a.className='card';a.dataset.c=it.c;a.dataset.g=grp(it);a.href='#/'+it.s;
-  a.innerHTML=art(it,it.h)+'<h3></h3><p>'+it.tags+'</p>';
-  a.querySelector('h3').textContent=it.t;
+  a.innerHTML=art(it,it.h)+'<h3></h3><p></p>';
+  a.querySelector('h3').textContent=it.t;a.querySelector('p').textContent=it.tags;
+  var bg=a.querySelector('.big');if(bg)bg.textContent=it.big;
   grid.appendChild(a);
 });
 var fbox=document.getElementById('filters'),home=document.getElementById('home');
@@ -210,11 +187,14 @@ function route(){
   wasDetail=true;
   if(grp(it)!==mode)setMode(grp(it));
   var list=items.filter(function(x){return grp(x)===grp(it)}),i=list.indexOf(it);
-  var pv=list[(i+list.length-1)%list.length],nx=list[(i+1)%list.length],d=info[it.s]||["","","",""];
-  det.innerHTML='<a class="back" href="#/"><span aria-hidden="true">←</span> Back</a><h1 tabindex="-1"></h1><p class="tags">'+it.tags+'</p>'+art(it,0)+
-   '<div class="meta"><div><h4>Year</h4><p>'+d[0]+'</p></div><div><h4>Role</h4><p>'+d[1]+'</p></div><div><h4>Tools</h4><p>'+d[2]+'</p></div></div><p class="desc">'+d[3]+'</p>'+
+  var pv=list[(i+list.length-1)%list.length],nx=list[(i+1)%list.length];
+  var meta='';[['Year',it.year],['Role',it.role],['Tools',it.tools]].forEach(function(m){if(m[1])meta+='<div><h4>'+m[0]+'</h4><p class="mv"></p></div>'});
+  if(meta)meta='<div class="meta">'+meta+'</div>';
+  det.innerHTML='<a class="back" href="#/"><span aria-hidden="true">←</span> Back</a><h1 tabindex="-1"></h1><p class="tags"></p>'+art(it,0)+
+   meta+'<div class="desc prose">'+it.html+'</div>'+
    '<div class="pn"><a href="#/'+pv.s+'"><small>Previous</small><span class="pt"></span></a><a class="nx" href="#/'+nx.s+'"><small>Next</small><span class="nt"></span></a></div>';
-  det.querySelector('h1').textContent=it.t;det.querySelector('.pt').textContent=pv.t;det.querySelector('.nt').textContent=nx.t;
+  det.querySelector('h1').textContent=it.t;det.querySelector('.tags').textContent=it.tags;
+  var vals=[it.year,it.role,it.tools].filter(Boolean);det.querySelectorAll('.mv').forEach(function(e,n){e.textContent=vals[n]});det.querySelector('.pt').textContent=pv.t;det.querySelector('.nt').textContent=nx.t;
   document.title=it.t+' – Ella Holl';
   document.body.dataset.view='detail';
   scrollTo(0,0);det.querySelector('h1').focus({preventScroll:true});
