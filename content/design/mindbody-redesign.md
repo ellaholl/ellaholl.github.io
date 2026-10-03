@@ -8,7 +8,7 @@ cover: images/mindbody_1.png
 label: Book in 3 taps
 labelcolor: #0d2f3a
 height: 420
-draft: true
+draft: false
 ---
 
 *Draft: delete the italic prompts as you fill each section in, then remove the line `draft: true` from the top of this file and run `node build.mjs`. This is an independent concept project and is not affiliated with Mindbody.*
